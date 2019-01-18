@@ -18,22 +18,18 @@ Navigate to Settings -> Data Sources -> Add Data Source
 The following are the variables you will need to configure your datasource with
 
 **HTTP**
+
 | Variable      | Value                 |
 |---------------|-----------------------|
 | URL           | http://influxdb:8086  |
 
 **InfluxDB Details**
+
 | Variable      | Value                 |
 |---------------|-----------------------|
 | Database      | datasource            |
 | User          | root                  |
 | Password      | root                  |
-
-| Tables        | Are           |
-| ------------- |:-------------:|
-| col 3 is      | right-aligned |
-| col 2 is      | centered      |
-| zebra stripes | are neat      |
 
 ### Chronograf
 
