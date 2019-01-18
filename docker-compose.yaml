@@ -13,7 +13,7 @@ services:
       - proxy
 
   influxdb:
-    image: influxdb
+    image: influxdb:1.7.3
     container_name: "influxdb"
     volumes:
       - ./influxdb:/var/lib/influxdb:rw
@@ -22,20 +22,18 @@ services:
     environment:
       INFLUXDB_DB: "datasource"
       VIRTUAL_HOST: "influxdb"
-      VIRTUAL_PORT: 8086
     networks:
       - proxy
 
   telegraf:
-    image: telegraf
+    image: telegraf:1.9.2
     container_name: "telegraf"
     expose:
       - 8125/udp
     volumes: 
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:rw
     environment:
-      VIRTUAL_PORT: 8125
-      VIRTUAL_HOST: telegraf
+      VIRTUAL_HOST: "metrics-host"
       INFLUXDB_GRAFANA_DB: "datasource"
       INFLUXDB_GRAFANA_USER: "root"
       INFLUXDB_GRAFANA_PW: "root"
@@ -43,22 +41,18 @@ services:
       - proxy
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:5.4.3
     container_name: "grafana"
     volumes:
       - ./grafana:/var/lib/grafana:rw
-    expose:
-      - 3000
     environment:
       VIRTUAL_HOST: "grafana"
     networks:
       - proxy
 
   chronograf:
-    image: chronograf
+    image: chronograf:1.7.7
     container_name: "chronograf"
-    expose:
-      - 8888
     volumes:
       - ./chronograf:/var/lib/chronograf:rw
     environment:
