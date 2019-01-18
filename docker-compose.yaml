@@ -66,17 +66,6 @@ services:
     networks:
       - proxy
 
-  # metrics:
-  #   image: samuelebistoletti/docker-statsd-influxdb-grafana:latest
-  #   container_name: metrics
-  #   ports: [ '3003:3003', '3004:8888', '8086:8086', '22022:22', '8125:8125/udp' ]
-  #   ulimits:
-  #     nofile:
-  #       hard: 66000
-  #       soft: 66000
-  #   networks:
-  #     - proxy
-
 networks:
   proxy:
     external: true
