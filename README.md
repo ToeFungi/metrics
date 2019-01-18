@@ -1,5 +1,9 @@
 # Metrics Made Easy 
 
+This is a simple docker based metrics system. It's as simple as running a single command and you're ready to start metri-cing your projects. With this, you can easily host your own Grafana with it's own sub-domain meaning no more accessing dashboards and what-not by IP and port number.
+
+This system makes use of several different docker images which work together to provide a fairly powerful utility tool. Grafana and Chronograf for graphing the metrics that are collected by Telegraf and statsD which are stored in a very powerful, NoSQL, InfluxDB.
+
 ## Setup
 
 ### Grafana
