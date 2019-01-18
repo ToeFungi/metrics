@@ -12,12 +12,22 @@ You will be prompted to change this upon first succesful login. You should proba
 
 #### Configure datasource
 You will need to setup the datasource so that Grafana knows where it will be pulling the data from.
+
 Navigate to Settings -> Data Sources -> Add Data Source
+
 The following are the variables you will need to configure your datasource with
 
-*HTTP*
+**HTTP**
+| Variable      | Value                 |
+| ------------- | --------------------- |
+| URL           | http://influxdb:8086  |
 
-Url: http://influxdb:8086
+**InfluxDB Details**
+| Variable      | Value                 |
+| ------------- | --------------------- |
+| Database      | datasource            |
+| User          | root                  |
+| Password      | root                  |
 
 ### Chronograf
 
