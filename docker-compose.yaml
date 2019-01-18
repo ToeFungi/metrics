@@ -17,23 +17,17 @@ services:
     container_name: "influxdb"
     volumes:
       - ./influxdb:/var/lib/influxdb:rw
-    expose:
-      - 8086
     environment:
       INFLUXDB_DB: "datasource"
-      VIRTUAL_HOST: "influxdb"
     networks:
       - proxy
 
   telegraf:
     image: telegraf:1.9.2
     container_name: "telegraf"
-    expose:
-      - 8125/udp
     volumes: 
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:rw
     environment:
-      VIRTUAL_HOST: "metrics-host"
       INFLUXDB_GRAFANA_DB: "datasource"
       INFLUXDB_GRAFANA_USER: "root"
       INFLUXDB_GRAFANA_PW: "root"
