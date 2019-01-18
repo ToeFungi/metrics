@@ -15,7 +15,8 @@ You will need to setup the datasource so that Grafana knows where it will be pul
 Navigate to Settings -> Data Sources -> Add Data Source
 The following are the variables you will need to configure your datasource with
 
-HTTP
+*HTTP*
+
 Url: http://influxdb:8086
 
 ### Chronograf
