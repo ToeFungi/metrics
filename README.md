@@ -126,6 +126,19 @@ class Metrics {
 
 This is very simple and straight forward but that client will allow you to metric your application quite well most of the time when it comes to hobby projects.
 
+## Environment
+When starting this project up for the first time, you may want to have a look at the environment variables as changing these after creation of the services could possibly maybe I don't really know have side effects. Here is a table outlining the variables you can change and what the defaults are:
+
+| Variable      	| Default     			| Description |
+|-------------------|-----------------------|-------------|
+| INFLUX_DATABASE   | datasource 	 	    | The database that influx will use to store statsD |
+| INFLUX_USERNAME   | root                  | The username to gain access to influx |
+| INFLUX_PASSWORD	| root 					| The password to gain access to inflix |
+| GRAFANA_HOST		| grafana 				| The host name that you'll be able to access Grafana with |
+| CHRONOGRAF_HOST	| chronograf 			| The host name that you'll be able to access Chronograf with |
+
+I would advise against messing with the environment variables at the moment as they are not the most stable of items to play around with. However if you must, then off you go!
+
 ## Resources
 [Telegraf](https://hub.docker.com/_/telegraf)
 

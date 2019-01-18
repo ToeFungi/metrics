@@ -1,5 +1,8 @@
 version: '3.3'
 
+# This system is stable at the moment so try not to break it :P
+# @author Alex Pickering
+
 services:
   proxy:
     image: jwilder/nginx-proxy:latest
@@ -14,11 +17,13 @@ services:
 
   influxdb:
     image: influxdb:1.7.3
-    container_name: "influxdb"
+    container_name: "${INFLUX_CONTAINER:-influxdab}"
     volumes:
       - ./influxdb:/var/lib/influxdb:rw
     environment:
-      INFLUXDB_DB: "datasource"
+      INFLUXDB_DB: "${INFLUX_DATABASE:-datasource}"
+      INFLUXDB_USER: "${INFLUX_USERNAME:-root}"
+      INFLUXDB_USER_PASSWORD: "${INFLUX_PASSWORD:-root}"
     networks:
       - proxy
 
@@ -28,9 +33,9 @@ services:
     volumes: 
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:rw
     environment:
-      INFLUXDB_GRAFANA_DB: "datasource"
-      INFLUXDB_GRAFANA_USER: "root"
-      INFLUXDB_GRAFANA_PW: "root"
+      INFLUXDB_GRAFANA_DB: "${INFLUX_DATABASE:-datasource}"
+      INFLUXDB_GRAFANA_USER: "${INFLUX_USERNAME:-root}"
+      INFLUXDB_GRAFANA_PW: "${INFLUX_PASSWORD:-root}"
     networks:
       - proxy
 
@@ -40,7 +45,7 @@ services:
     volumes:
       - ./grafana:/var/lib/grafana:rw
     environment:
-      VIRTUAL_HOST: "grafana"
+      VIRTUAL_HOST: "${GRAFANA_HOST:-grafana}"
     networks:
       - proxy
 
@@ -50,7 +55,7 @@ services:
     volumes:
       - ./chronograf:/var/lib/chronograf:rw
     environment:
-      VIRTUAL_HOST: "chronograf"
+      VIRTUAL_HOST: "${CHRONOGRAF_HOST:-chronograf}"
     networks:
       - proxy
 
