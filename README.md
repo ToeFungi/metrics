@@ -19,12 +19,12 @@ The following are the variables you will need to configure your datasource with
 
 **HTTP**
 | Variable      | Value                 |
-| ------------- | --------------------- |
+|---------------|-----------------------|
 | URL           | http://influxdb:8086  |
 
 **InfluxDB Details**
 | Variable      | Value                 |
-| ------------- | --------------------- |
+|---------------|-----------------------|
 | Database      | datasource            |
 | User          | root                  |
 | Password      | root                  |
