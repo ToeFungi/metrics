@@ -5,8 +5,9 @@
 ### Grafana
 #### Login
 By default the username and password are the same for Grafana.
-Username: admin
-Password: admin
+
+| Username      | admin   |
+| Password      | admin   |
 
 You will be prompted to change this upon first succesful login. You should probably do that.
 
@@ -19,11 +20,15 @@ The following are the variables you will need to configure your datasource with
 
 **HTTP**
 
+It is important to note that all of these variables are by default and can be reconfigured in the `docker-compose.yaml` file.
+
 | Variable      | Value                 |
 |---------------|-----------------------|
 | URL           | http://influxdb:8086  |
 
 **InfluxDB Details**
+
+It is important to note that all of these variables are by default and can be reconfigured in the `docker-compose.yaml` file.
 
 | Variable      | Value                 |
 |---------------|-----------------------|
