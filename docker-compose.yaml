@@ -1,0 +1,82 @@
+version: '3.3'
+
+services:
+  proxy:
+    image: jwilder/nginx-proxy:latest
+    container_name: "proxy"
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - proxy
+
+  influxdb:
+    image: influxdb
+    container_name: "influxdb"
+    volumes:
+      - ./influxdb:/var/lib/influxdb:rw
+    expose:
+      - 8086
+    environment:
+      INFLUXDB_DB: "datasource"
+      VIRTUAL_HOST: "influxdb"
+      VIRTUAL_PORT: 8086
+    networks:
+      - proxy
+
+  telegraf:
+    image: telegraf
+    container_name: "telegraf"
+    expose:
+      - 8125/udp
+    volumes: 
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:rw
+    environment:
+      VIRTUAL_PORT: 8125
+      VIRTUAL_HOST: telegraf
+      INFLUXDB_GRAFANA_DB: "datasource"
+      INFLUXDB_GRAFANA_USER: "root"
+      INFLUXDB_GRAFANA_PW: "root"
+    networks:
+      - proxy
+
+  grafana:
+    image: grafana/grafana
+    container_name: "grafana"
+    volumes:
+      - ./grafana:/var/lib/grafana:rw
+    expose:
+      - 3000
+    environment:
+      VIRTUAL_HOST: "grafana"
+    networks:
+      - proxy
+
+  chronograf:
+    image: chronograf
+    container_name: "chronograf"
+    expose:
+      - 8888
+    volumes:
+      - ./chronograf:/var/lib/chronograf:rw
+    environment:
+      VIRTUAL_HOST: "chronograf"
+    networks:
+      - proxy
+
+  # metrics:
+  #   image: samuelebistoletti/docker-statsd-influxdb-grafana:latest
+  #   container_name: metrics
+  #   ports: [ '3003:3003', '3004:8888', '8086:8086', '22022:22', '8125:8125/udp' ]
+  #   ulimits:
+  #     nofile:
+  #       hard: 66000
+  #       soft: 66000
+  #   networks:
+  #     - proxy
+
+networks:
+  proxy:
+    external: true

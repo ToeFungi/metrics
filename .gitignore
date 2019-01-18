@@ -1,0 +1,6 @@
+grafana/
+chronograf/
+telegraf/**
+influxdb/
+
+!telegraf/telegraf.conf
