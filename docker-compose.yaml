@@ -17,13 +17,11 @@ services:
 
   influxdb:
     image: influxdb:1.7.3
-    container_name: "${INFLUX_CONTAINER:-influxdab}"
+    container_name: "influxdb"
     volumes:
       - ./influxdb:/var/lib/influxdb:rw
     environment:
-      INFLUXDB_DB: "${INFLUX_DATABASE:-datasource}"
-      INFLUXDB_USER: "${INFLUX_USERNAME:-root}"
-      INFLUXDB_USER_PASSWORD: "${INFLUX_PASSWORD:-root}"
+      INFLUXDB_DB: "datasource"
     networks:
       - proxy
 
@@ -33,9 +31,7 @@ services:
     volumes: 
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:rw
     environment:
-      INFLUXDB_GRAFANA_DB: "${INFLUX_DATABASE:-datasource}"
-      INFLUXDB_GRAFANA_USER: "${INFLUX_USERNAME:-root}"
-      INFLUXDB_GRAFANA_PW: "${INFLUX_PASSWORD:-root}"
+      INFLUXDB_GRAFANA_DB: "datasource"
     networks:
       - proxy
 
@@ -45,7 +41,7 @@ services:
     volumes:
       - ./grafana:/var/lib/grafana:rw
     environment:
-      VIRTUAL_HOST: "${GRAFANA_HOST:-grafana}"
+      VIRTUAL_HOST: "grafana"
     networks:
       - proxy
 
@@ -55,7 +51,7 @@ services:
     volumes:
       - ./chronograf:/var/lib/chronograf:rw
     environment:
-      VIRTUAL_HOST: "${CHRONOGRAF_HOST:-chronograf}"
+      VIRTUAL_HOST: "chronograf"
     networks:
       - proxy
 
